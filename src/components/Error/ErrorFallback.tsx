@@ -1,1 +1,0 @@
-export const ErrorFallback : React.FC = () => <>Something went wrong...</>;
