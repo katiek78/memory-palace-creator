@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useJourneys } from "./JourneyListContext";
 import { Journey } from "../../types/Journey";
 
 interface JourneyProps {
@@ -26,11 +25,14 @@ const JourneyComponent = (props: JourneyProps) => (
 );
 
 const JourneyList : React.FC = () => {
-    const {journeys, setJourneys} = useJourneys();
+    //const {journeys, setJourneys} = useJourneys();
+    const [journeys, setJourneys] = useState<Journey[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
 
      //This method fetches the records from the database.
     useEffect(() => {
     async function getJourneys() {
+        setIsLoading(true);        
         const response = await fetch(`http://localhost:5000/journey/`);
     
         if (!response.ok) {
@@ -40,6 +42,7 @@ const JourneyList : React.FC = () => {
         }
     
         const journeys = await response.json();
+        setIsLoading(false);
         setJourneys(journeys);
     }
     
@@ -77,8 +80,11 @@ return(
     <h2>My Journeys</h2>    
     {journeys.length > 0 && 
     <p>You have {journeys.length} journey{journeys.length > 1 && 's'}.</p>}    
-    {journeys.length === 0 && 
+    {journeys.length === 0 && !isLoading &&
     <p>You have not created any journeys yet.</p>
+    }
+    {isLoading &&
+    <p>Loading...</p>
     }
     {/* <button>New journey</button> */}
     <p>{journeyList()}</p>
