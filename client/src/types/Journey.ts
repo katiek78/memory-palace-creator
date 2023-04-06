@@ -1,4 +1,5 @@
 export interface Journey {
+    _id: string;
     name: string;
     points: JourneyPoint[]
 }

@@ -6,7 +6,7 @@ interface JourneyListInterface {
     setJourneys: React.Dispatch<React.SetStateAction<Journey[]>>
 }
 
-const JourneyListContext = React.createContext<JourneyListInterface>({journeys: [{name: 'Test journey', points: []}], setJourneys: () => {}});
+const JourneyListContext = React.createContext<JourneyListInterface>({journeys: [{name: 'Test journey', points: [], _id: ''}], setJourneys: () => {}});
 
 export function useJourneys() {
     return useContext(JourneyListContext)

@@ -13,9 +13,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-    <BrowserRouter />
+    <BrowserRouter>
       <App />
-    <BrowserRouter />
+    </BrowserRouter>
     </ErrorBoundary>
   </React.StrictMode>
 );

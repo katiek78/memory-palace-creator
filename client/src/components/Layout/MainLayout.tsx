@@ -6,7 +6,7 @@ import { Journey } from "../../types/Journey";
 import JourneyListContext from "../Journey/JourneyListContext";
 
 const MainLayout: React.FC = () => {
-  const [journeys, setJourneys] = useState<Journey[]>([{name: 'Test journey', points: []}]);
+  const [journeys, setJourneys] = useState<Journey[]>([{name: 'Test journey', points: [], _id: ''}]);
 
     return (
       <>
