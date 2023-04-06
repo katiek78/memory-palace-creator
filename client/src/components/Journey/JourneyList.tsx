@@ -12,6 +12,7 @@ const JourneyComponent = (props: JourneyProps) => (
  <tr>
    <td>{props.journey.name}</td>
    <td>
+     <Link className="btn btn-link" to={`/view/${props.journey._id}`}>View</Link> |
      <Link className="btn btn-link" to={`/edit/${props.journey._id}`}>Edit name</Link> |
      <button className="btn btn-link"
        onClick={() => {
