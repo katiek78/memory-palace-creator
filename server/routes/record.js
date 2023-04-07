@@ -33,8 +33,7 @@ recordRoutes.route("/journey/:id").get(async function (req, res) {
  try {
     const result = await db_connect
     .collection("palaces")
-    .findOne(myquery);    
-    console.log(result);
+    .findOne(myquery);        
     res.json(result);
 } catch (e) {
     console.log("An error occurred pulling the records. " + e);
@@ -87,5 +86,22 @@ recordRoutes.route("/:id").delete(async (req, response) => {
     console.log("An error occurred when deleting a record. " + e);
  }
 });
- 
+
+// This section will help you create a new point.
+recordRoutes.route("/point/add/:id").post(async function (req, response) {
+    let db_connect = dbo.getDb();    
+    let myquery = { _id: new ObjectId(req.params.id) };
+    let myobj = {
+      _id : new ObjectId(),
+      name: req.body.name,
+      location: req.body.location
+    };
+    try {    
+       const res = await db_connect.collection("palaces").updateOne(myquery, {$push: {points: myobj}});           
+       response.json(res);
+       } catch (e) {
+       console.log("An error occurred when adding a journey point. " + e);
+    }});
+    
+
 module.exports = recordRoutes;
