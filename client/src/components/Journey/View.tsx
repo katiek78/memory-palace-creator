@@ -28,16 +28,15 @@ const PointComponent = (props: PointProps) => (
 
 const View : React.FC = () => {
 
-    const [journey, setJourney] = useState<Journey>({name:'', _id:''});
-    const [isLoading, setIsLoading] = useState(false);
+    const [journey, setJourney] = useState<Journey>({name:'', _id:'', points: []});
+    const [isLoading, setIsLoading] = useState(true);
     const params = useParams();
     const navigate = useNavigate();
  
 
      //This method fetches the records from the database.
     useEffect(() => {
-    async function getJourney() {
-        setIsLoading(true);    
+    async function getJourney() {        
         let id = params.id?.toString();
         if (!id) {
           window.alert(`Invalid ID supplied`);
@@ -54,18 +53,19 @@ const View : React.FC = () => {
     
         const journey = await response.json();
         setIsLoading(false);
-        setJourney(journey);
+        setJourney(journey);        
     }
     
     getJourney();
     
     return;
-    }, [journey.points?.length]);
+    }, [journey.points]); //if we have journey.points?.length in here, it doesn't re-render when we delete a point
+    //if we just put journey or even journey.points in here then it works but it's constantly 'loading'
 
 
     //This method deletes a point
-    async function deletePoint(id: string) {
-        await fetch(`http://localhost:5000/deletePoint/${id}`, {
+    async function deletePoint(id: string) {        
+        await fetch(`http://localhost:5000/delete/${journey._id}/${id}`, {
           method: "DELETE"
         });
       

@@ -103,5 +103,17 @@ recordRoutes.route("/point/add/:id").post(async function (req, response) {
        console.log("An error occurred when adding a journey point. " + e);
     }});
     
+// This section will help you delete a point
+recordRoutes.route("/delete/:journeyId/:id").delete(async (req, response) => {
+    let db_connect = dbo.getDb();
+    let myquery = { _id: new ObjectId(req.params.journeyId) };
+    try {
+        const obj = await db_connect.collection("palaces").updateOne(myquery, {$pull: {points: {_id: {$eq: new ObjectId(req.params.id)}}}}); 
+    //   console.log("1 document deleted");
+    //   response.json(obj);
+    } catch (e) {
+       console.log("An error occurred when deleting a record. " + e);
+    }
+   });
 
 module.exports = recordRoutes;

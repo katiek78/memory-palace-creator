@@ -27,12 +27,11 @@ const JourneyComponent = (props: JourneyProps) => (
 const JourneyList : React.FC = () => {
     //const {journeys, setJourneys} = useJourneys();
     const [journeys, setJourneys] = useState<Journey[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
      //This method fetches the records from the database.
     useEffect(() => {
-    async function getJourneys() {
-        setIsLoading(true);        
+    async function getJourneys() {            
         const response = await fetch(`http://localhost:5000/journey/`);
     
         if (!response.ok) {
