@@ -87,6 +87,20 @@ recordRoutes.route("/:id").delete(async (req, response) => {
  }
 });
 
+// This section will help you get a single journey by point id
+recordRoutes.route("/point/:id").get(async function (req, res) {
+    let db_connect = dbo.getDb();
+    let myquery = {points: {$elemMatch:{_id: new ObjectId(req.params.id)}}}; //this gets the actual journey!  
+    try {
+       const result = await db_connect
+       .collection("palaces")
+       .findOne(myquery);        
+       res.json(result);
+   } catch (e) {
+       console.log("An error occurred pulling the records. " + e);
+   }
+   });
+
 // This section will help you create a new point.
 recordRoutes.route("/point/add/:id").post(async function (req, response) {
     let db_connect = dbo.getDb();    
@@ -114,6 +128,27 @@ recordRoutes.route("/delete/:journeyId/:id").delete(async (req, response) => {
     } catch (e) {
        console.log("An error occurred when deleting a record. " + e);
     }
+   });
+
+   // This section will help you update a point by id.
+recordRoutes.route("/point/update/:id").post(async function (req, response) {
+    let db_connect = dbo.getDb();
+    //let myquery = {"points._id": new ObjectId(req.params.id)};
+    let myquery = {points: {$elemMatch:{_id: new ObjectId(req.params.id)}}};
+    let newvalues = {
+      $set: { 'points.$.name':
+        req.body.name, 'points.$.location' : req.body.location
+      },
+    };
+    try {
+        const res = await db_connect
+       .collection("palaces")
+       .updateOne(myquery, newvalues);
+        console.log("1 document updated");
+        response.json(res);
+       } catch {
+        console.log("An error occurred when updating a record. " + e);
+       }
    });
 
 module.exports = recordRoutes;

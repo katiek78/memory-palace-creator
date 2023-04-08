@@ -4,6 +4,7 @@ import Home from '../Home/Home';
 import Create from '../Journey/Create';
 import CreatePoint from '../Journey/CreatePoint';
 import Edit from '../Journey/Edit';
+import EditPoint from '../Journey/EditPoint';
 import View from '../Journey/View';
 import Error404 from '../Error/Error404';
 
@@ -15,6 +16,7 @@ const Router: React.FC = () =>
                  <Route path="/edit/:id" element={<Edit />}></Route>      
                  <Route path="/view/:id" element={<View />}></Route>      
                  <Route path="/createPoint/:id" element={<CreatePoint />}></Route>
+                 <Route path="/edit-point/:id" element={<EditPoint />}></Route>
                  <Route path="*" element={<Error404></Error404>} />
             </Route>
         </Routes>    

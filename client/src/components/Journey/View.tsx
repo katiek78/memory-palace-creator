@@ -6,14 +6,15 @@ import { JourneyPoint } from "../../types/Journey";
 interface PointProps {
     point: JourneyPoint;
     deletePoint: (id: string) => void;
+    journeyId: string;
 }
 
 const PointComponent = (props: PointProps) => (
     <tr>
       <td>{props.point.name}</td>
       <td>
-        <Link className="btn btn-link" to={`/view/${props.point._id}`}>View</Link> |
-        <Link className="btn btn-link" to={`/edit/${props.point._id}`}>Edit name</Link> |
+        <Link className="btn btn-link" to={`/view-point/${props.point._id}`}>View</Link> |
+        <Link className="btn btn-link" to={`/edit-point/${props.point._id}`} state={{ journeyId: props.journeyId }}>Edit</Link> |
         <button className="btn btn-link"
           onClick={() => {
             props.deletePoint(props.point._id);
@@ -80,6 +81,7 @@ const View : React.FC = () => {
         <PointComponent
           point={point}
           deletePoint={() => deletePoint(point._id)}
+          journeyId={journey._id}
           key={point._id}
         />
       );
@@ -89,9 +91,9 @@ const View : React.FC = () => {
 return(
     <div>
     <h3>View Journey</h3>
-    {journey.points?.length && journey.points.length > 0 && 
+    {!isLoading && journey.points?.length && journey.points.length > 0 && 
     <p>This journey has {journey.points.length} point{journey.points.length > 1 && 's'}.</p>}    
-    {journey.points?.length && journey.points.length === 0 && !isLoading &&
+    {!isLoading && journey.points?.length && journey.points.length === 0 &&
     <p>You have not created any points yet.</p>
     }
     {isLoading &&
