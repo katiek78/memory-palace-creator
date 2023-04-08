@@ -2,18 +2,21 @@ import { useState, useEffect } from "react";
 import { useParams , useNavigate, Link} from "react-router-dom";
 import { Journey } from "../../types/Journey";
 import { JourneyPoint } from "../../types/Journey";
+import { API_KEY } from "../../config/config";
 
 interface PointProps {
     point: JourneyPoint;
     deletePoint: (id: string) => void;
     journeyId: string;
+    journeyName: string;
+    pointPos: number;
 }
 
 const PointComponent = (props: PointProps) => (
     <tr>
       <td>{props.point.name}</td>
       <td>
-        <Link className="btn btn-link" to={`/view-point/${props.point._id}`}>View</Link> |
+        <Link className="btn btn-link" to={`/view-point/${props.point._id}`} state={{journeyName: props.journeyName, pointPos: props.pointPos, point: props.point}}>View</Link> |
         <Link className="btn btn-link" to={`/edit-point/${props.point._id}`} state={{ journeyId: props.journeyId }}>Edit</Link> |
         <button className="btn btn-link"
           onClick={() => {
@@ -76,17 +79,41 @@ const View : React.FC = () => {
 
  // This method will map out the points in the journey
  function pointList() {
-    return journey.points?.map((point) => {
+    return journey.points?.map((point, i) => {
       return (
         <PointComponent
           point={point}
           deletePoint={() => deletePoint(point._id)}
           journeyId={journey._id}
+          journeyName={journey.name}
+          pointPos = {i}
           key={point._id}
         />
       );
     });
   }
+
+function pointViews() {
+  return journey.points?.map((point, i) => {
+    return(
+      <>
+      <div>
+<iframe
+  width="300"
+  height="225"
+  style={{border:0, padding:'10px'}}
+  loading="lazy"
+  allowFullScreen
+  referrerPolicy="no-referrer-when-downgrade"
+  src={`https://www.google.com/maps/embed/v1/streetview?key=${API_KEY}
+    &location=${point.location}`}>
+</iframe>
+<div>{point.name}</div></div>
+</>
+    )
+  })
+
+}
 
 return(
     <div>
@@ -101,7 +128,11 @@ return(
     }
     {/* <button>New journey</button> */}
     <p>{pointList()}</p>
+    
+   <p style={{display:'flex', textAlign: 'center'}}>{pointViews()}</p>
     <Link className="btn btn-link" to={`/createPoint/${journey._id}`}>Add point</Link>
+
+    
     </div>
 );
 
