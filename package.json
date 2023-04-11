@@ -1,8 +1,18 @@
 {
+  "name": "Memory Palace Creator",
+  "homepage": "http://katiek78.github.io/memory-palace-creator",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongodb": "^5.2.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }

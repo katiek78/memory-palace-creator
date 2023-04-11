@@ -55,7 +55,7 @@ const JourneyList : React.FC = () => {
 
     //This method deletes a journey
      async function deleteJourney(id: string) {
-   await fetch(`http://localhost:5000/${id}`, {
+   await fetch(`${URL}/${id}`, {
      method: "DELETE"
    });
  
@@ -131,7 +131,7 @@ export default JourneyList;
 //        return;
 //      }
  
-//      const records = await response.json();
+//      const records = await response.json();s
 //      setRecords(records);
 //    }
  
