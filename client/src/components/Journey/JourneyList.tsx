@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Journey } from "../../types/Journey";
+import { config } from '../config/constants';
+const URL = config.url;
 
 interface JourneyProps {
     journey: Journey;
@@ -32,7 +34,7 @@ const JourneyList : React.FC = () => {
      //This method fetches the records from the database.
     useEffect(() => {
     async function getJourneys() {            
-        const response = await fetch(`http://localhost:5000/journey/`);
+        const response = await fetch(`${URL}/journey/`);
     
         if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
