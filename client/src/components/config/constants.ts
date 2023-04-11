@@ -1,5 +1,5 @@
 const production = {
-    url: 'https://<project-name>.herokuapp.com'
+    url: 'https://vercel.com/katiek78/memory-palace-creator/AzGccDCxSTV62rpRqbD3DLi9we7C'
   };
   const development = {
     url: 'http://localhost:5000'
