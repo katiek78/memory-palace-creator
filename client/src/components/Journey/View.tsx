@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams , useNavigate, Link} from "react-router-dom";
 import { Journey } from "../../types/Journey";
 import { JourneyPoint } from "../../types/Journey";
-import { API_KEY } from "../../config/config";
+import EmbedStreetView from "./EmbedStreetView";
 
 interface PointProps {
     point: JourneyPoint;
@@ -95,21 +95,11 @@ const View : React.FC = () => {
 
 function pointViews() {
   return journey.points?.map((point, i) => {
-    return(
-      <>
+    return(    
       <div>
-<iframe
-  width="300"
-  height="225"
-  style={{border:0, padding:'10px'}}
-  loading="lazy"
-  allowFullScreen
-  referrerPolicy="no-referrer-when-downgrade"
-  src={`https://www.google.com/maps/embed/v1/streetview?key=${API_KEY}
-    &location=${point.location}`}>
-</iframe>
-<div>{point.name}</div></div>
-</>
+        <EmbedStreetView width={300} height={225} point={point}></EmbedStreetView>
+        <div>{point.name}</div>
+      </div>      
     )
   })
 
