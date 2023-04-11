@@ -1,6 +1,7 @@
 import { useState, FormEvent } from "react";
 import { useNavigate, useParams } from "react-router";
 import LocationExplanation from "./LocationExplanation";
+import { validateLocation } from "../../validation/validateLocation";
  
 export default function CreatePoint() {
     const [form, setForm] = useState({
@@ -13,18 +14,20 @@ export default function CreatePoint() {
  
     // These methods will update the state properties.
     function updateForm(value: any) {
+      //if (value.hasOwnProperty('location')) value.location = validateLocation(form.location);
       return setForm((prev) => {
         return { ...prev, ...value };
       });
     }
-
-    // This function will handle the submission.
+  
+      // This function will handle the submission.
  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
   
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newPoint = { ...form };
-    
+    newPoint.location = validateLocation(newPoint.location);
+
     let id = params.id?.toString();
      if (!id) {
        window.alert(`Invalid ID supplied`);

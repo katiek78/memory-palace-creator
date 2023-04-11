@@ -2,7 +2,8 @@ import { useState, useEffect, FormEvent } from "react";
 import { useParams, useNavigate, useLocation } from "react-router";
 import { JourneyPoint } from "../../types/Journey";
 import LocationExplanation from "./LocationExplanation";
- 
+import { validateLocation } from "../../validation/validateLocation";
+
 export default function EditPoint() {
  const [form, setForm] = useState({
    name: "",
@@ -58,6 +59,7 @@ export default function EditPoint() {
      name: form.name,
      location: form.location    
    };
+   editedPoint.location = validateLocation(editedPoint.location);
  
    // This will send a post request to update the data in the database.
    await fetch(`http://localhost:5000/point/update/${params.id}`, {
