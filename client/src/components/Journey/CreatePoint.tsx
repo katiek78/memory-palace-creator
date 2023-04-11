@@ -1,5 +1,6 @@
 import { useState, FormEvent } from "react";
 import { useNavigate, useParams } from "react-router";
+import LocationExplanation from "./LocationExplanation";
  
 export default function CreatePoint() {
     const [form, setForm] = useState({
@@ -60,7 +61,7 @@ export default function CreatePoint() {
             id="name"
             value={form.name}
             onChange={(e) => updateForm({ name: e.target.value })}
-          />
+          />          
         </div>
         <div className="form-group">
           <label htmlFor="location">Location</label>
@@ -71,6 +72,7 @@ export default function CreatePoint() {
             value={form.location}
             onChange={(e) => updateForm({ location: e.target.value })}
           />
+          <LocationExplanation />
         </div>
         {/* <div className="form-group">
           <div className="form-check form-check-inline">
