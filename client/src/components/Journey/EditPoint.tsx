@@ -3,6 +3,8 @@ import { useParams, useNavigate, useLocation } from "react-router";
 import { JourneyPoint } from "../../types/Journey";
 import LocationExplanation from "./LocationExplanation";
 import { validateLocation } from "../../validation/validateLocation";
+import { config } from '../config/constants';
+const URL = config.url;
 
 export default function EditPoint() {
  const [form, setForm] = useState({
@@ -22,7 +24,7 @@ export default function EditPoint() {
        navigate(`/view/${journeyId}`);
        return;
      }
-     const response = await fetch(`http://localhost:5000/point/${id}`);
+     const response = await fetch(`${URL}/point/${id}`);
  
      if (!response.ok) {
        const message = `An error has occurred: ${response.statusText}`;
@@ -62,7 +64,7 @@ export default function EditPoint() {
    editedPoint.location = validateLocation(editedPoint.location);
  
    // This will send a post request to update the data in the database.
-   await fetch(`http://localhost:5000/point/update/${params.id}`, {
+   await fetch(`${URL}/point/update/${params.id}`, {
      method: "POST",
      body: JSON.stringify(editedPoint),
      headers: {

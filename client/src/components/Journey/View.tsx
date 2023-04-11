@@ -3,6 +3,8 @@ import { useParams , useNavigate, Link} from "react-router-dom";
 import { Journey } from "../../types/Journey";
 import { JourneyPoint } from "../../types/Journey";
 import EmbedStreetView from "./EmbedStreetView";
+import { config } from '../config/constants';
+const URL = config.url;
 
 interface PointProps {
     point: JourneyPoint;
@@ -47,7 +49,7 @@ const View : React.FC = () => {
           navigate("/");
           return;
         }    
-        const response = await fetch(`http://localhost:5000/journey/${id}`);
+        const response = await fetch(`${URL}/journey/${id}`);
     
         if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
@@ -69,7 +71,7 @@ const View : React.FC = () => {
 
     //This method deletes a point
     async function deletePoint(id: string) {        
-        await fetch(`http://localhost:5000/delete/${journey._id}/${id}`, {
+        await fetch(`${URL}/delete/${journey._id}/${id}`, {
           method: "DELETE"
         });
       

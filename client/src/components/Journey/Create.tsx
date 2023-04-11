@@ -1,5 +1,7 @@
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router";
+import { config } from '../config/constants';
+const URL = config.url;
  
 export default function Create() {
     const [form, setForm] = useState({
@@ -22,7 +24,7 @@ export default function Create() {
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newJourney = { ...form };
   
-    await fetch("http://localhost:5000/journey/add", {
+    await fetch(`${URL}/journey/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

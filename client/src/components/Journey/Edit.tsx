@@ -1,5 +1,7 @@
 import { useState, useEffect, FormEvent } from "react";
 import { useParams, useNavigate } from "react-router";
+import { config } from '../config/constants';
+const URL = config.url;
  
 export default function Edit() {
  const [form, setForm] = useState({
@@ -16,7 +18,7 @@ export default function Edit() {
        navigate("/");
        return;
      }
-     const response = await fetch(`http://localhost:5000/journey/${id}`);
+     const response = await fetch(`${URL}/journey/${id}`);
  
      if (!response.ok) {
        const message = `An error has occurred: ${response.statusText}`;
@@ -53,7 +55,7 @@ export default function Edit() {
    };
  
    // This will send a post request to update the data in the database.
-   await fetch(`http://localhost:5000/update/${params.id}`, {
+   await fetch(`${URL}/update/${params.id}`, {
      method: "POST",
      body: JSON.stringify(editedJourney),
      headers: {

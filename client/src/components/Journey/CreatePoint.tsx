@@ -2,6 +2,8 @@ import { useState, FormEvent } from "react";
 import { useNavigate, useParams } from "react-router";
 import LocationExplanation from "./LocationExplanation";
 import { validateLocation } from "../../validation/validateLocation";
+import { config } from '../config/constants';
+const URL = config.url;
  
 export default function CreatePoint() {
     const [form, setForm] = useState({
@@ -35,7 +37,7 @@ export default function CreatePoint() {
        return;
      }
   
-    await fetch(`http://localhost:5000/point/add/${id}`, {
+    await fetch(`${URL}/point/add/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
