@@ -1,6 +1,7 @@
 import { useState, useEffect, FormEvent } from "react";
 import { useParams, useNavigate, useLocation } from "react-router";
 import { JourneyPoint } from "../../types/Journey";
+import LocationExplanation from "./LocationExplanation";
  
 export default function EditPoint() {
  const [form, setForm] = useState({
@@ -94,6 +95,7 @@ export default function EditPoint() {
            value={form.location}
            onChange={(e) => updateForm({ location: e.target.value })}
          />
+         <LocationExplanation />
        </div>
        <br />
  
