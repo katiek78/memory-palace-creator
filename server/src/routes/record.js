@@ -29,7 +29,7 @@ recordRoutes.route("/journey").get(async function (req, res) {
  
 // This section will help you get a single record by id
 recordRoutes.route("/journey/:id").get(async function (req, res) {
- let db_connect = dbo.getDb();
+ let db_connect = await dbo.getDb(); //********** */
  let myquery = {_id: new ObjectId(req.params.id)};  
  try {
     const result = await db_connect
