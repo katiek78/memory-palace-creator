@@ -1,6 +1,6 @@
 const production = {
    // url: 'https://vercel.com/katiek78/memory-palace-creator/AzGccDCxSTV62rpRqbD3DLi9we7C'
-   url: 'https://memory-palace-creator.vercel.app/'
+   url: 'https://memory-palace-creator.vercel.app'
   };
   const development = {
     url: 'http://localhost:5000'
