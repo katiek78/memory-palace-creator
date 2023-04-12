@@ -1,5 +1,5 @@
 const { MongoClient } = require("mongodb");
-const Db = process.env.ATLAS_URI;
+const Db = process.env.NODE_ENV === "production" ? process.env.MONGODB_URI : process.env.ATLAS_URI;
 console.log(Db);
 const client = new MongoClient(Db, {
   useNewUrlParser: true,
