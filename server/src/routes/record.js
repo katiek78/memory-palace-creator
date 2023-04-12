@@ -22,7 +22,7 @@ recordRoutes.route("/journey").get(async function (req, res) {
         .toArray();        
         res.json(journeys);
     } catch (e) {
-        res.status(500).json({message: e.message})
+        res.status(500).json({message: e.message + dbo.json})
         console.log("An error occurred pulling the records. " + e);
     }
 });
