@@ -10,12 +10,12 @@ const client = new MongoClient(Db, {
 });
  
 var _db;
-let conn; //remove this 
+
 module.exports = {
   connectToServer: async () => {
     try {
-        conn = await client.connect(); //remove the conn
-        const db = conn.db("memory-palaces"); //trying something, change the conn back to client
+        await client.connect();
+        const db = client.db("memory-palaces");
 
         if (db)
         {                
