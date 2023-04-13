@@ -14,7 +14,7 @@ const ObjectId = require("mongodb").ObjectId;
  
 // This section will help you get a list of all the records.
 recordRoutes.route("/journey").get(async function (req, res) {      
- let db_connect = await dbo.getDb("memory-palaces"); /*sdfsdlf*/
+ let db_connect = dbo.getDb("memory-palaces");
     try {
         const journeys = await db_connect
         .collection("palaces")

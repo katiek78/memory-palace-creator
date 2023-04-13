@@ -1,8 +1,7 @@
 import './App.css'
 import Router from './components/Routes/Router'
 
-function App() {
-
+function App() {  
   return (      
        <Router />                 
   )
