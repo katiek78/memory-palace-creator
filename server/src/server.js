@@ -25,7 +25,7 @@ const dbo = require("./db/conn");
  
 app.listen(port, async () => {
   // perform a database connection when server starts
-  await dbo.connectToServer(function (err) {
+  await dbo.connectToServer(function (err) { //Note: added await here
     if (err) {
       console.error(err);
      throw new Error("Could not connect to server");

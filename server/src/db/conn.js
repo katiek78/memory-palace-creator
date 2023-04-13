@@ -15,16 +15,16 @@ module.exports = {
   connectToServer: async () => {
     try {
         await client.connect();
-        const db = client.db("memory-palaces");
+        _db = client.db("memory-palaces");
 
-        if (db)
-        {                
-            //_db = db.db("palaces");
-            _db = db;
-            console.log("Successfully connected to MongoDB.");
-        } else {
-            throw new Error("No DB");
-        }
+        // if (db)
+        // {                
+        //     //_db = db.db("palaces");
+        //     _db = db;
+        //     console.log("Successfully connected to MongoDB.");
+        // } else {
+        //     throw new Error("No DB");
+        // }
     } catch (error) {
         console.error('Failed to connect to MongoDB server');
         throw new Error("Failed to connect");
