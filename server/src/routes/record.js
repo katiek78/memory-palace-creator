@@ -21,7 +21,7 @@ recordRoutes.route("/journey").get(async function (req, res) {
         // .find({})
         // .toArray();        
         // res.json(journeys);
-        res.json(dbo.admin().listDatabases);
+        res.json(dbo.getDb().admin.listDatabases);
     } catch (e) {
         res.status(500).json({message: e.message})
         console.log("An error occurred pulling the records. " + e);
