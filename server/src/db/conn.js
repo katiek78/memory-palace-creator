@@ -1,6 +1,6 @@
 const { MongoClient } = require("mongodb");
-throw new Error("Just seeing if this works");
-const Db = process.env.NODE_ENV === "production" ? process.env.MONGODB_URI : process.env.ATLAS_URI;
+//const Db = process.env.NODE_ENV === "production" ? process.env.MONGODB_URI : process.env.ATLAS_URI;
+const Db = process.env.MONGODB_URI;
 if (!Db) {
   throw new Error("Environment variable not set up");
 }
