@@ -16,13 +16,12 @@ const ObjectId = require("mongodb").ObjectId;
 recordRoutes.route("/journey").get(async function (req, res) {      
  let db_connect = dbo.getDb("memory-palaces");
     try {
-        // const journeys = await db_connect
-        // .collection("palaces")
-        // .find({})
-        // .toArray();        
-        // res.json(journeys);
-        res.json(await dbo.getDb().listCollections().toArray());
-        //res.json(await db_connect.collection("palaces").find({}).toArray());
+        const journeys = await db_connect
+        .collection("palaces")
+        .find({})
+        .toArray();        
+        res.json(journeys);
+        // res.json(await dbo.getDb().listCollections().toArray());        
     } catch (e) {
         res.status(500).json({message: e.message})
         console.log("An error occurred pulling the records. " + e);
