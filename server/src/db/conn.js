@@ -10,12 +10,17 @@ const client = new MongoClient(Db, {
 });
  
 var _db;
+// let cachedDb = {};
 
 module.exports = {
   connectToServer: async () => {
+    //  if (_db) return;
     try {
-        await client.connect();
+        const db = await client.connect();
+        // cachedDb.isConnected = db.connections[0].readyState;
         _db = client.db("memory-palaces");
+        console.log("DB connection successful!");
+        //return cachedDb;
 
         // if (db)
         // {                
@@ -35,3 +40,26 @@ module.exports = {
     return _db;
   },
 };
+
+
+// const MongoClient = require('mongodb').MongoClient;
+
+// // Connection URL
+// const url = 'mongodb://localhost:27017';
+
+// // Database Name
+// const dbName = 'myproject';
+
+// // Create a new MongoClient
+// const client = new MongoClient(url, { useNewUrlParser: true });
+
+// // Use connect method to connect to the Server
+// client.connect(function(err) {
+//   console.log("Connected successfully to server");
+
+//   const db = client.db(dbName);
+
+//   // Perform database operations here...
+
+//   client.close();
+// });

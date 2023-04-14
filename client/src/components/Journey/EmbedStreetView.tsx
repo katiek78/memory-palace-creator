@@ -1,5 +1,5 @@
 import { JourneyPoint } from "../../types/Journey";
-// import { API_KEY } from "../../config/config";
+//import { API_KEY } from "../../config/config";
 const API_KEY = process.env.API_KEY;
 
 interface EmbedStreetViewProps {
